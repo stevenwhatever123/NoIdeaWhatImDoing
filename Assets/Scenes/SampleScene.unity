@@ -514,7 +514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 528825390}
-  speed: 11
+  animator: {fileID: 528825385}
+  speed: 4
   gravity: -30
   groundMask:
     serializedVersion: 2
@@ -579,8 +580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4429293b0cecd94db0e7a4b6b652a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  animator: {fileID: 0}
+  characterController: {fileID: 528825390}
+  animator: {fileID: 528825385}
 --- !u!1 &564268831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1336559548}
+  animator: {fileID: 0}
   speed: 8
   gravity: -9.8
   groundMask:
