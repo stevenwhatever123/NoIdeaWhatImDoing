@@ -54,8 +54,8 @@ public class MovementManager : MonoBehaviour
     public void RecieveInput(Vector2 _horizontalInput)
     {
         horizontalInput = _horizontalInput;
-        animator.SetInteger("VelocityX", (int) horizontalInput.x);
-        animator.SetInteger("VelocityY", (int) horizontalInput.y);
+        animator.SetInteger("VelocityX", (int) Mathf.Ceil(horizontalInput.x));
+        animator.SetInteger("VelocityY", (int) Mathf.Ceil(horizontalInput.y));
         print(horizontalInput);
     }
 }
