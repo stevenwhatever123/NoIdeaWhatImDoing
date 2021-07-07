@@ -134,6 +134,14 @@ public class @Player : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Value"",
+                    ""id"": ""b0af2bd5-757b-4ef8-afb3-b4852dfb2040"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -145,6 +153,17 @@ public class @Player : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Take"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""968fc1d5-d5b9-4dc3-ae57-2944db93e7b9"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -222,6 +241,7 @@ public class @Player : IInputActionCollection, IDisposable
         // ActionMovement
         m_ActionMovement = asset.FindActionMap("ActionMovement", throwIfNotFound: true);
         m_ActionMovement_Take = m_ActionMovement.FindAction("Take", throwIfNotFound: true);
+        m_ActionMovement_Inventory = m_ActionMovement.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -321,11 +341,13 @@ public class @Player : IInputActionCollection, IDisposable
     private readonly InputActionMap m_ActionMovement;
     private IActionMovementActions m_ActionMovementActionsCallbackInterface;
     private readonly InputAction m_ActionMovement_Take;
+    private readonly InputAction m_ActionMovement_Inventory;
     public struct ActionMovementActions
     {
         private @Player m_Wrapper;
         public ActionMovementActions(@Player wrapper) { m_Wrapper = wrapper; }
         public InputAction @Take => m_Wrapper.m_ActionMovement_Take;
+        public InputAction @Inventory => m_Wrapper.m_ActionMovement_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_ActionMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,6 +360,9 @@ public class @Player : IInputActionCollection, IDisposable
                 @Take.started -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnTake;
                 @Take.performed -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnTake;
                 @Take.canceled -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnTake;
+                @Inventory.started -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_ActionMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -345,6 +370,9 @@ public class @Player : IInputActionCollection, IDisposable
                 @Take.started += instance.OnTake;
                 @Take.performed += instance.OnTake;
                 @Take.canceled += instance.OnTake;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -403,5 +431,6 @@ public class @Player : IInputActionCollection, IDisposable
     public interface IActionMovementActions
     {
         void OnTake(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

@@ -27,13 +27,16 @@ public class MouseLookManager : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.up * mouseX * Time.deltaTime);
+        if(Time.timeScale > 0)
+        {
+            transform.Rotate(Vector3.up * mouseX * Time.deltaTime);
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -xClampPositive, xClampNegative);
-        Vector3 targetRotation = transform.eulerAngles;
-        targetRotation.x = xRotation;
-        PlayerCamera.eulerAngles = targetRotation;
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -xClampPositive, xClampNegative);
+            Vector3 targetRotation = transform.eulerAngles;
+            targetRotation.x = xRotation;
+            PlayerCamera.eulerAngles = targetRotation;
+        }
     }
 
     public void RecieveInput(Vector2 mouseInput)

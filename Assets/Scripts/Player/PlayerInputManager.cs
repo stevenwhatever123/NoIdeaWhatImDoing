@@ -21,8 +21,6 @@ public class PlayerInputManager : MonoBehaviour
     Vector2 horizontalInput;
     Vector2 mouseInput;
 
-
-    // Start is called before the first frame update
     void Awake()
     {
         controls = new Player();
