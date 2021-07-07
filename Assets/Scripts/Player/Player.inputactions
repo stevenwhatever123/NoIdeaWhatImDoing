@@ -109,6 +109,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ActionMovement",
+            "id": "b8c205eb-01c5-45ca-8dc9-a2d584d1bc6c",
+            "actions": [
+                {
+                    "name": "Take",
+                    "type": "Value",
+                    "id": "de97e682-04a0-43fe-9634-87374c642569",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6e550203-7e96-401d-aaee-8d749f7373c5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Take",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

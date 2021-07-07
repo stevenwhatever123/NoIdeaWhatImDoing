@@ -10,11 +10,17 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField]
     MouseLookManager mouseLook;
 
+    [SerializeField]
+    ActionManager action;
+
     Player controls;
     Player.GroundMovementActions groundMovement;
 
+    Player.ActionMovementActions actionMovement;
+
     Vector2 horizontalInput;
     Vector2 mouseInput;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -26,6 +32,9 @@ public class PlayerInputManager : MonoBehaviour
 
         groundMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         groundMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+
+        actionMovement = controls.ActionMovement;
+        actionMovement.Take.performed += ctx => action.Take();
     }
 
     // Update is called once per frame

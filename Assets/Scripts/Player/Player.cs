@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/Player.inputactions'
 
 using System;
 using System.Collections;
@@ -122,6 +122,33 @@ public class @Player : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ActionMovement"",
+            ""id"": ""b8c205eb-01c5-45ca-8dc9-a2d584d1bc6c"",
+            ""actions"": [
+                {
+                    ""name"": ""Take"",
+                    ""type"": ""Value"",
+                    ""id"": ""de97e682-04a0-43fe-9634-87374c642569"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6e550203-7e96-401d-aaee-8d749f7373c5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Take"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -192,6 +219,9 @@ public class @Player : IInputActionCollection, IDisposable
         m_GroundMovement_HorizontalMovement = m_GroundMovement.FindAction("HorizontalMovement", throwIfNotFound: true);
         m_GroundMovement_MouseX = m_GroundMovement.FindAction("MouseX", throwIfNotFound: true);
         m_GroundMovement_MouseY = m_GroundMovement.FindAction("MouseY", throwIfNotFound: true);
+        // ActionMovement
+        m_ActionMovement = asset.FindActionMap("ActionMovement", throwIfNotFound: true);
+        m_ActionMovement_Take = m_ActionMovement.FindAction("Take", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -286,6 +316,39 @@ public class @Player : IInputActionCollection, IDisposable
         }
     }
     public GroundMovementActions @GroundMovement => new GroundMovementActions(this);
+
+    // ActionMovement
+    private readonly InputActionMap m_ActionMovement;
+    private IActionMovementActions m_ActionMovementActionsCallbackInterface;
+    private readonly InputAction m_ActionMovement_Take;
+    public struct ActionMovementActions
+    {
+        private @Player m_Wrapper;
+        public ActionMovementActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Take => m_Wrapper.m_ActionMovement_Take;
+        public InputActionMap Get() { return m_Wrapper.m_ActionMovement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionMovementActions set) { return set.Get(); }
+        public void SetCallbacks(IActionMovementActions instance)
+        {
+            if (m_Wrapper.m_ActionMovementActionsCallbackInterface != null)
+            {
+                @Take.started -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnTake;
+                @Take.performed -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnTake;
+                @Take.canceled -= m_Wrapper.m_ActionMovementActionsCallbackInterface.OnTake;
+            }
+            m_Wrapper.m_ActionMovementActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Take.started += instance.OnTake;
+                @Take.performed += instance.OnTake;
+                @Take.canceled += instance.OnTake;
+            }
+        }
+    }
+    public ActionMovementActions @ActionMovement => new ActionMovementActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -336,5 +399,9 @@ public class @Player : IInputActionCollection, IDisposable
         void OnHorizontalMovement(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+    }
+    public interface IActionMovementActions
+    {
+        void OnTake(InputAction.CallbackContext context);
     }
 }
