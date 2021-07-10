@@ -14,16 +14,18 @@ public class InventoryHandler : MonoBehaviour
 
     Player.ActionMovementActions actionMovement;
 
+    private Inventory inventory;
+
     void Awake()
     {
-        /*
         controls = new Player();
 
         actionMovement = controls.ActionMovement;
         actionMovement.Inventory.performed += ctx => Inventory();
 
+        inventory = new Inventory();
+
         UI_Inventory.SetInventory(inventory);
-        */
     }
 
     void Inventory()
